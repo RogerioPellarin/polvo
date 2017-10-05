@@ -1,0 +1,23 @@
+RewriteEngine on
+Options +FollowSymLinks
+
+RewriteRule ^$ index.php [L]
+
+RewriteCond $1 !^(system|application|views)
+
+RewriteRule ^.*assets/(.*)$ assets/$1 [L]
+RewriteRule ^.*web/(.*)$ web/$1 [L]
+RewriteRule ^.*uploads/(.*)$ uploads/$1 [L]
+RewriteRule ^.*css/(.*)$ css/$1 [L]
+RewriteRule ^.*js/(.*)$ js/$1 [L]
+RewriteRule ^.*images/(.*)$ images/$1 [L]
+
+RewriteCond $1 !^(index\.php|video_files|robots\.txt|favicon\.png)
+RewriteCond $1 !^(geowebmining\.php|video_files|robots\.txt|favicon\.png)
+
+
+#negacao do arquivo de js do google
+RewriteCond $1 !^(www.google-analytics.com/ga.js)
+
+RewriteRule ^(.*)$ index.php/$1 [L]
+

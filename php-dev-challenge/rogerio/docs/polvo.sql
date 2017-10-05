@@ -1,0 +1,44 @@
+CREATE SCHEMA `polvo`;
+USE `polvo`;
+
+CREATE USER 'polvo'@'%' IDENTIFIED BY 'polvo';
+GRANT ALL PRIVILEGES ON `polvo` . * TO 'polvo'@'%';
+FLUSH PRIVILEGES;
+
+CREATE TABLE `order`
+(
+pk_order INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+status SMALLINT(1) DEFAULT 1,
+created_at TIMESTAMP DEFAULT '0000-00-00 00:00:00',
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+PRIMARY KEY (pk_order)
+) ENGINE=InnoDB;
+
+CREATE TABLE product
+(
+pk_product INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+sku INTEGER,
+name VARCHAR(100),
+description TEXT,
+price DOUBLE PRECISION,
+status SMALLINT(1) DEFAULT 1,
+created_at TIMESTAMP DEFAULT '0000-00-00 00:00:00',
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+PRIMARY KEY (pk_product)
+) ENGINE=InnoDB;
+
+CREATE TABLE order_product
+(
+pk_order_product INTEGER NOT NULL AUTO_INCREMENT UNIQUE,
+fk_order INTEGER,
+fk_product INTEGER,
+quantity INTEGER,
+status SMALLINT(1) DEFAULT 1,
+created_at TIMESTAMP DEFAULT '0000-00-00 00:00:00',
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+PRIMARY KEY (pk_order_product)
+) ENGINE=InnoDB;
+
+ALTER TABLE order_product ADD FOREIGN KEY fk_order_idxfk (fk_order) REFERENCES `order` (pk_order);
+
+ALTER TABLE order_product ADD FOREIGN KEY fk_product_idxfk (fk_product) REFERENCES product (pk_product);

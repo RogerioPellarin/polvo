@@ -1,0 +1,16 @@
+RewriteEngine on
+
+Options +FollowSymLinks
+
+RewriteCond $1 !^(system|application|views)
+
+RewriteRule ^.*web/js/(.*)$ web/js/$1 [L]
+RewriteRule ^.*web/css/(.*)$ web/css/$1 [L]
+RewriteRule ^.*web/img/(.*)$ web/img/$1 [L]
+RewriteRule ^.*uploads/(.*)$ uploads/$1 [L]
+RewriteRule ^.*assets/(.*)$ assets/$1 [L]
+
+RewriteCond $1 !^(index\.php|video\_files|robots\.txt|favicon\.png)
+
+RewriteRule ^(.*)$ index.php/$1 [L]
+
